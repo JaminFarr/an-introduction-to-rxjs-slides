@@ -1,0 +1,35 @@
+
+/* Code highlighting */
+.highlighted, .highlighted span {
+  color: white !important;
+  transition: color 0.5s;
+}
+
+.was-highlighted, .was-highlighted span {
+  transition: color 0.5s;
+}
+
+.highlighted {
+  background-color: #00f;
+  transition: background-color 0.5s;
+}
+
+.was-highlighted {
+  transition: background-color 0.5s;
+}
+
+
+/* Increase contrast for projector */
+.hljs {
+  background: #000;
+}
+
+/* For the lowercase x of RxJS */
+.reveal h1, .reveal h2 {
+  text-transform: none;
+}
+
+.border-less {
+  border: 0 !important; 
+  margin: 0 !important;
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>An Introduction into RxJS</title>
+
+  <link rel="stylesheet" href="reveal/css/reveal.css">
+  <link rel="stylesheet" href="reveal/css/theme/black.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="reveal/lib/css/gruvbox-dark.css">
+  <link rel="stylesheet" href="css/my-styles.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <!-- Titlecard -->
+
+    <div class="slides">
+      <section>
+        <h1>An Introduction to RxJS</h1>
+        <p>Ben Farr</p>
+        add logo
+        <aside class="notes">
+
+        </aside>
+      </section>
+
+      <!-- Me and Work -->
+
+      <section>
+        <section>
+          <h1>About Me</h1>
+          <p>
+            <img data-src="img/beard-still.png" data-fragment-src='{ "0": "img/beard-still.png", "6": "img/beard-loop.gif" }' />
+            <ul>
+              <li class="fragment">Name: <span class="fragment">Ben Farr (jaminfarr)</span></li>
+              <li class="fragment">Job: <span class="fragment">Internal Systems developer</span></li>
+              <li class="fragment">Beard: <span class="fragment">Variable</span></li>
+            </ul>
+          </p>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h1>Evolving Networks</h1>
+          <img src="img/ev-bonded-link.jpg" />
+          <aside class="notes">
+
+          </aside>
+        </section>
+      </section>
+
+      <!-- RxJS history -->
+
+      <section>
+        <section>
+          <h2>A Very brief history</h2>
+          <p>Microsoft</p>
+          <p>Netflix</p>
+          <p class="fragment">Google's <img class="border-less" src="img/angular.png"> <span class="fragment fade-out">2</span></p>
+
+          <aside class="notes">
+            <p>Rx is family of libraries created my Microsoft around 7 years ago. There's Rx.Net, RxJava, RxSwift, etc...</p>
+            <p>They are used to manage events and data streams in a consistent way across languages.</p>
+            <p>Netflix started to use the library but wanted something that would better fit resource limited smart TVs and
+              set-top boxes.</p>
+            <p>With Microsoft's permission Netflix took over the development for version 5 which came out of beta at the end
+              of 2016</p>
+            <p>Google also use version 5 and it is the only dependency of Google's Angular 2, now just called angular.</p>
+            <p>If you have heard of RxJS because of Angular, I want to confirm RxJS is standalone, it does not require angular.</p>
+            <p>All my examples do not use any frameworks but there are plugins and ways of using RxJS with all of them.</p>
+          </aside>
+        </section>
+
+        <section>
+          <h2>RxJS 5</h2>
+
+          <p>Built to match ES spec
+            <p>
+
+              <aside class="notes">
+
+
+              </aside>
+        </section>
+
+        <section>
+          <h1>RxJS</h1>
+          <p>Reactive Extensions for JavaScript</p>
+          <p>Reactive Programing</p>
+          <p>Streams of data over time</p>
+          <p>Observable</p>
+          <aside class="notes">
+            I know as javascript developer we have too many buzz words and the word Reactive has been overused.
+
+          </aside>
+        </section>
+
+      </section>
+
+      <section>
+        <h1>Angular 2</h1>
+        <p>(now just angular)</p>
+
+
+        <aside class="notes">
+
+        </aside>
+      </section>
+
+      <section>
+        <h1>Async Data Streams</h1>
+        <aside class="notes">
+
+        </aside>
+      </section>
+
+
+      <section>
+        <section>
+          <h1>Realtime data collector</h1>
+
+
+
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h1>Realtime data collector</h1>
+
+
+
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+      </section>
+    </div>
+  </div>
+  <script src="js/Rx.min.js"></script>
+  <script src="reveal/lib/js/head.min.js"></script>
+  <script src="reveal/js/reveal.js"></script>
+
+  <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      history: true,
+      viewDistance: 3,
+      controls: false,
+      progress: false,
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [
+        { src: 'reveal/plugin/markdown/marked.js' },
+        { src: 'reveal/plugin/markdown/markdown.js' },
+        { src: 'reveal/plugin/notes/notes.js', async: true },
+        { src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+        { src: 'js/highlighter.js', callback: function () { setupHighlighter(Reveal); } },
+        { src: 'js/fragment-src.js', callback: function () { setupFragmentSrc(Reveal); } },
+        { src: 'js/mouse-control.js', callback: function () { setupMouseControl(Reveal); } }
+      ]
+    });
+  </script>
+</body>
+
+</html>
