@@ -30,6 +30,41 @@
 }
 
 .border-less {
-  border: 0 !important; 
-  margin: 0 !important;
+  border: 0 !important;
+  margin: 0 !important; 
+}
+
+.transparent-img {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.row:before,
+.row:after {
+  display: table;
+  content: " ";
+}
+
+.row:after {
+  clear: both;
+}
+
+.a-half {
+  width: 50%;
+  float: left;
+}
+
+.a-third {
+  width: 33.33333%;
+  float: left;
+}
+
+.a-quarter {
+  width: 25%;
+  float: left;
+}
+
+.three-quarters {
+  width: 75%;
+  float: left;
 }

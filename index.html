@@ -29,10 +29,9 @@
     <!-- Titlecard -->
 
     <div class="slides">
-      <section>
+      <section data-background="/img/Rx_Logo_L.png" data-background-size="1024px 1024px">
         <h1>An Introduction to RxJS</h1>
         <p>Ben Farr</p>
-        add logo
         <aside class="notes">
 
         </aside>
@@ -44,9 +43,9 @@
         <section>
           <h1>About Me</h1>
           <p>
-            <img data-src="img/beard-still.png" data-fragment-src='{ "0": "img/beard-still.png", "6": "img/beard-loop.gif" }' />
+            <img data-src="img/beard-still.png" data-fragment-src='{ "0": "img/beard-still.png", "5": "img/beard-loop.gif" }' />
             <ul>
-              <li class="fragment">Name: <span class="fragment">Ben Farr (jaminfarr)</span></li>
+              <li>Name: <span class="fragment">Ben Farr (jaminfarr)</span></li>
               <li class="fragment">Job: <span class="fragment">Internal Systems developer</span></li>
               <li class="fragment">Beard: <span class="fragment">Variable</span></li>
             </ul>
@@ -58,7 +57,7 @@
 
         <section>
           <h1>Evolving Networks</h1>
-          <img src="img/ev-bonded-link.jpg" />
+          <img class="border-less" src="img/ev-bonded-link.jpg" />
           <aside class="notes">
 
           </aside>
@@ -70,21 +69,119 @@
       <section>
         <section>
           <h2>A Very brief history</h2>
-          <p>Microsoft</p>
-          <p>Netflix</p>
-          <p class="fragment">Google's <img class="border-less" src="img/angular.png"> <span class="fragment fade-out">2</span></p>
+          <img class="border-less transparent-img" src="/img/ReactiveX.jpg" />
+          <p>Rx.NET, RxJS, RxJava, RxSwift, RxScala, etc...</p>
+          <div class="fragment">
+            <img class="border-less transparent-img" src="/img/microsoft-logo.png" />
+          </div>
+          <p class="fragment"><img class="border-less" src="/img/netflix-logo.png" /></p>
 
           <aside class="notes">
             <p>Rx is family of libraries created my Microsoft around 7 years ago. There's Rx.Net, RxJava, RxSwift, etc...</p>
             <p>They are used to manage events and data streams in a consistent way across languages.</p>
             <p>Netflix started to use the library but wanted something that would better fit resource limited smart TVs and
-              set-top boxes.</p>
+              set-top boxes.
+            </p>
             <p>With Microsoft's permission Netflix took over the development for version 5 which came out of beta at the end
               of 2016</p>
-            <p>Google also use version 5 and it is the only dependency of Google's Angular 2, now just called angular.</p>
+          </aside>
+        </section>
+
+        <section>
+          <img class="border-less transparent-img" src="img/google_logo.png">
+          <p>
+            <img class="border-less transparent-img" src="img/AngularJS-Shield.svg"> <span class="fragment fade-out" style="font-size: 300%;">2</span>
+          </p>
+
+          <aside class="notes">
+            <p>Google, claerly feeling left out use version 5, it is the only dependency of Google's Angular 2, now just called
+              angular. *
+            </p>
             <p>If you have heard of RxJS because of Angular, I want to confirm RxJS is standalone, it does not require angular.</p>
             <p>All my examples do not use any frameworks but there are plugins and ways of using RxJS with all of them.</p>
           </aside>
+        </section>
+
+        <section>
+          <h1>What is RxJS?</h1>
+          <h2>Reactive Extentions for JavaScript</h2>
+          <ul class="fragment highlight-red">
+            <li>Observables + LINQ + Schedulers</li>
+            <li>Reactive Programming</li>
+            <li>An API for asynchronous programming with observable streams</li>
+          </ul>
+
+          <aside class="notes">
+            These are some of ways Rx has been explained. They're all pretty terrible *
+          </aside>
+        </section>
+
+        <section>
+          <h1>It's all about EVENTS and EVENT STREAMS</h1>
+          <aside class="notes">
+            So when you think Rx, think events!
+          </aside>
+        </section>
+
+        <section>
+          <div class="row stretch">
+            <h2 class="stretch">You are already using Event streams</h2>
+          </div>
+          <div class="row stretch">
+            <div class="fragment a-half">
+              <p>Dom Events</p>
+              <ul>
+                <li>Clicks</li>
+                <li>Mouse moves</li>
+                <li>Scrolls</li>
+                <li>Key presses</li>
+                <img class="fragment border-less" src="img/cat-keyboard.gif" width="200px" />
+              </ul>
+            </div>
+            <div class="a-half">
+              <div class="fragment">
+                <p>Timers</p>
+                <ul>
+                  <li>setTimeout</li>
+                  <li>setInterval</li>
+                </ul>
+              </div>
+              <div class="fragment">
+                <p>Others</p>
+                <ul>
+                  <li>Ajax</li>
+                  <li>Websockets</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <aside class="notes">
+            Bascly anything that takes a callback to let you know when it has more data or an event has happened
+          </aside>
+        </section>
+
+        <section>
+          <h2>Problems with current event<span class="fragment fade-out" data-fragment-index="1">s</span> <span class="fragment"
+              data-fragment-index="1">systems</span></h2>
+
+          <ul>
+            <li class="fragment">Many Different interfaces</li>
+            <li class="fragment">Hard to cancel</li>
+            <li class="fragment">Hard to combine</li>
+            <li class="fragment">Working with single events not streams</li>
+            <li class="fragment">State management</li>
+          </ul>
+
+          <aside class="notes">
+            What are the problems with current events? WHOA!! That's a loaded question. I'm not touching that. ToDo:
+          </aside>
+        </section>
+
+
+        <!--
+        <section>
+          <img src="img/mouse-is-a-database.jpg" />
         </section>
 
         <section>
@@ -94,41 +191,112 @@
             <p>
 
               <aside class="notes">
-
-
+                Netflix constrants everyone's gain. More modular, only pull in the bits you need. ES spec
               </aside>
         </section>
+-->
+
+      </section>
+
+      <section>
+        <section>
+          <h2>The Observable interface</h2>
+          <pre><code data-trim data-noescape>
+            // source$ is an Observable
+
+            source$<span class="fragment">.subscribe(
+              // next
+              <span class="hl-2">function(item) { ... }</span>,
+              
+              // error
+              <span class="hl-3">function(err) { ... }</span>,
+              
+              // completed
+              <span class="hl-4">function() { ... }</span>
+            )
+            </span>
+            </code></pre>
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+        </section>
 
         <section>
-          <h1>RxJS</h1>
-          <p>Reactive Extensions for JavaScript</p>
-          <p>Reactive Programing</p>
-          <p>Streams of data over time</p>
-          <p>Observable</p>
+          <p>Subscribe with an object</p>
+          <pre><code data-trim data-noescape class="javascript">
+            source$.subscribe({
+              next: function(item) { ... },
+
+              error: function(err) { ... },
+
+              completed: function() { ... }
+            })
+          </code></pre>
+
+          <div class="fragment">
+            <p>ES2015 Method definition shorthand</p>
+            <pre data-trim="" data-noescape="" class="javascript hljs">source$.subscribe({
+  <span class="hljs-function">next(<span class="hljs-params">item</span>) </span>{ ... },
+
+  <span class="hljs-function">error(<span class="hljs-params">err</span>) </span>{ ... },
+
+  <span class="hljs-function">completed(<span class="hljs-params"></span>) </span>{ ... }
+})</pre>
+          </div>
+        </section>
+
+
+        <section>
+          <h1>addListener vs subscribe</h1>
+        </section>
+
+        <section>
+          <h1>They're the same</h1>
+        </section>
+
+        <section>
+          <h1>Unitified interface</h1>
+          Ajax and mouse clicks Marble diagrams
+        </section>
+
+        <section>
+          <h1>Common ajax uses</h1>
+
+        </section>
+
+        <section>
+          <h1>Lazy</h1>
+          Like Functions they need to be sub'd before anything happens
+        </section>
+
+        <section>
+          <h1>Cancellation</h1>
+
+
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Modal Merging</h1>
           <aside class="notes">
-            I know as javascript developer we have too many buzz words and the word Reactive has been overused.
 
           </aside>
         </section>
-
       </section>
+
 
       <section>
-        <h1>Angular 2</h1>
-        <p>(now just angular)</p>
+        <section>
+          <h1>Stop watch</h1>
 
-
-        <aside class="notes">
-
-        </aside>
+          <aside class="notes">
+            <a href="http://jsbin.com/yavoyomala/edit?js,output">example</a>
+          </aside>
+        </section>
       </section>
 
-      <section>
-        <h1>Async Data Streams</h1>
-        <aside class="notes">
-
-        </aside>
-      </section>
 
 
       <section>
@@ -141,9 +309,12 @@
 
           </aside>
         </section>
+      </section>
 
+
+      <section>
         <section>
-          <h1>Realtime data collector</h1>
+          <h1>Ping alerts</h1>
 
 
 
@@ -151,8 +322,21 @@
 
           </aside>
         </section>
-
       </section>
+
+      <section>
+
+        <section>
+          <h1>Autocomplete / Incremental Search</h1>
+
+
+
+          <aside class="notes">
+
+          </aside>
+        </section>
+      </section>
+
     </div>
   </div>
   <script src="js/Rx.min.js"></script>
