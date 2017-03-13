@@ -29,7 +29,7 @@
     <!-- Titlecard -->
 
     <div class="slides">
-      <section data-background="img/Rx_Logo_L.png" data-background-size="1024px 1024px">
+      <section data-background="img/Rx_Logo_L.png" data-background-size="900px 900px">
         <h1>An Introduction to RxJS</h1>
         <p>Ben Farr</p>
         <aside class="notes">
@@ -46,8 +46,10 @@
             <img data-src="img/beard-still.png" data-fragment-src='{ "0": "img/beard-still.png", "5": "img/beard-loop.gif" }' />
             <ul>
               <li>Name: <span class="fragment">Ben Farr (jaminfarr)</span></li>
-              <li class="fragment">Job: <span class="fragment">Internal Systems developer</span></li>
-              <li class="fragment">Beard: <span class="fragment">Variable</span></li>
+              <li class="fragment">Job: <span class="fragment">Internal Systems Developer</span></li>
+              <li class="fragment">Beard: <span class="fragment css"><span class="hljs-selector-tag">Math</span><span class="hljs-selector-class">.random</span>()</span>
+              </li>
+
             </ul>
           </p>
           <aside class="notes">
@@ -57,7 +59,9 @@
 
         <section>
           <h1>Evolving Networks</h1>
-          <img class="border-less" src="img/ev-bonded-link.jpg" />
+          <img class="border-less" src="img/ev-bonded-link.jpg" data-fragment-src='{ "0": "img/ev-bonded-link.jpg", "1": "img/dashboards.jpg" }'
+          />
+          <span class="fragment"></span>
           <aside class="notes">
 
           </aside>
@@ -68,13 +72,16 @@
 
       <section>
         <section>
-          <h2>A Very brief history</h2>
-          <img class="border-less transparent-img" src="img/ReactiveX.jpg" />
-          <p>Rx.NET, RxJS, RxJava, RxSwift, RxScala, etc...</p>
+          <h2>A Very brief history of RxJS</h2>
+          <div class="fragment">
+            <img class="border-less transparent-img" src="img/ReactiveX.jpg" />
+            <div><a href="http://reactivex.io/">http://reactivex.io/</a></div>
+          </div>
+
           <div class="fragment">
             <img class="border-less transparent-img" src="img/microsoft-logo.png" />
           </div>
-          <p class="fragment"><img class="border-less" src="img/netflix-logo.png" /></p>
+          <p class="fragment">Rx.NET, RxJS, RxJava, RxSwift, RxScala, etc...</p>
 
           <aside class="notes">
             <p>Rx is family of libraries created my Microsoft around 7 years ago. There's Rx.Net, RxJava, RxSwift, etc...</p>
@@ -88,16 +95,19 @@
         </section>
 
         <section>
-          <img class="border-less transparent-img" src="img/google_logo.png">
-          <p>
-            <img class="border-less transparent-img" src="img/AngularJS-Shield.svg"> <span class="fragment fade-out" style="font-size: 300%;">2</span>
+          <p><img class="border-less" src="img/netflix-logo.png" width="400px" /></p>
+          <img class="border-less transparent-img fragment" src="img/google_logo.png">
+          <p class="fragment">
+            <img class="border-less transparent-img" src="img/AngularJS-Shield.svg" height="300px" width="300px"> <span class="fragment fade-out"
+              style="font-size: 700%;"> 2</span>
           </p>
 
           <aside class="notes">
-            <p>Google, claerly feeling left out use version 5, it is the only dependency of Google's Angular 2, now just called
-              angular. *
+            <p>Google, clearly feeling left out, use version 5, it is the only dependency of Angular 2, now just called angular.
+              *
             </p>
-            <p>If you have heard of RxJS because of Angular, I want to confirm RxJS is standalone, it does not require angular.</p>
+            <p>If you have heard of RxJS because of it's association with Angular, I want to confirm RxJS is standalone, it
+              does not require angular.</p>
             <p>All my examples do not use any frameworks but there are plugins and ways of using RxJS with all of them.</p>
           </aside>
         </section>
@@ -112,26 +122,27 @@
           </ul>
 
           <aside class="notes">
-            These are some of ways Rx has been explained. They're all pretty terrible *
+            These are some of ways Rx has been explained. Some are pretty terrible *
           </aside>
         </section>
 
         <section>
-          <h1>It's all about EVENTS and EVENT STREAMS</h1>
+          <h1>It's all about EVENTS <span class="fragment">and EVENT STREAMS</span></h1>
           <aside class="notes">
             So when you think Rx, think events!
           </aside>
         </section>
 
         <section>
-          <div class="row stretch">
-            <h2 class="stretch">You are already using Event streams</h2>
+          <div class="row">
+            <h3>You're already using event streams</h3>
           </div>
           <div class="row stretch">
             <div class="fragment a-half">
               <p>Dom Events</p>
               <ul>
                 <li>Clicks</li>
+                <li>Form input</li>
                 <li>Mouse moves</li>
                 <li>Scrolls</li>
                 <li>Key presses</li>
@@ -157,17 +168,49 @@
           </div>
 
           <aside class="notes">
-            Bascly anything that takes a callback to let you know when it has more data or an event has happened
+            Basically anything that takes a callback to let you know when it has more data or an event has happened
           </aside>
         </section>
+
+        <section>
+          <h1>Quick Example</h1>
+
+          <pre><code data-trim data-noescape>
+              <span class="hl-3">document</span>.addEventListener(<span class="hl-4">'click'</span>, <span class="hl-5">function(e) {
+                console.log('clicked');
+              }</span>);  
+          </code></pre>
+
+          <img class="fragment hd-2 hd-3 hd-4 hd-5 hd-6 hd-7" src="img/clicked.gif" />
+
+          <pre class="fragment"><code data-trim data-noescape>
+            var <span class="hl-7">clicks$</span> = Rx.Observable.fromEvent(<span class="hl-3">document</span>, <span class="hl-4">'click'</span>);
+
+            <span class="hl-7">clicks$</span>.subscribe(<span class="hl-5">function(e) {
+              console.log('clicked with Rx!');
+            }</span>);
+
+          </code></pre>
+
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+          <img class="fragment" src="img/clicked-with-rx.gif" />
+          <span class="fragment"></span>
+          <aside class="notes">
+            Document can be any kind of event emmiter, nodejs style with "addListener", jQuery style with "on" and "off". fromEvent will
+            figure out how to listen.
+          </aside>
+        </section>
+
 
         <section>
           <h2>Problems with current event<span class="fragment fade-out" data-fragment-index="1">s</span> <span class="fragment"
               data-fragment-index="1">systems</span></h2>
 
           <ul>
-            <li class="fragment">Many Different interfaces</li>
-            <li class="fragment">Hard to cancel</li>
+            <li class="fragment">Many different interfaces</li>
+            <li class="fragment">Hard to cancel/clean up</li>
             <li class="fragment">Hard to combine</li>
             <li class="fragment">Working with single events not streams</li>
             <li class="fragment">State management</li>
@@ -179,31 +222,107 @@
         </section>
 
 
-        <!--
-        <section>
-          <img src="img/mouse-is-a-database.jpg" />
-        </section>
 
-        <section>
-          <h2>RxJS 5</h2>
-
-          <p>Built to match ES spec
-            <p>
-
-              <aside class="notes">
-                Netflix constrants everyone's gain. More modular, only pull in the bits you need. ES spec
-              </aside>
-        </section>
--->
 
       </section>
 
       <section>
         <section>
+          <pre><code data-trim data-noescape>
+            setInterval(function() {
+              // Do Actions every 2 seconds
+            }, 2000);
+          </code></pre>
+
+          <pre class="fragment"><code data-trim data-noescape>
+            document.addEventListener('click', function(event) {
+              // Do Actions for every mouse click
+            });
+          </code></pre>
+
+          <pre class="fragment hd-3"><code data-trim data-noescape>
+            var request = new XMLHttpRequest();
+            request.open('GET', '/api/data', true);
+            request.onload = function() {
+              if (this.status >= 200 && this.status < 400) {
+                var data = JSON.parse(this.response);
+                // Do Actions when the server responds
+              } else {
+                // We reached our target server, but it returned an error
+              }
+            };
+            request.onerror = function() {
+              // There was a connection error of some sort
+            };
+            request.send();
+          </code></pre>
+
+          <pre class="fragment"><code data-trim data-noescape>
+            jQuery.ajax('/api/data', function(response) {
+              // Do Actions when the server responds
+            });
+          </code></pre>
+
+        </section>
+
+        <section>
+          <pre><code data-trim data-noescape>
+            var intervalID = setInterval(function() { /* ... */ }, 2000);
+
+            // Later
+
+            clearInterval(intervalID);
+          </code></pre>
+
+          <pre class="fragment"><code data-trim data-noescape>
+            var clickHandler = function() { /* ... */ };
+
+            <span class="hl-2">document</span>.addEventListener(<span class="hl-3">'click'</span>, <span = class="hl-4">clickHandler</span>);
+
+            // Later
+
+            <span class="hl-2">document</span>.removeEventListener(<span class="hl-3">'click'</span>, <span = class="hl-4">clickHandler</span>);
+          </code></pre>
+          <span class="fragment"></span><span class="fragment"></span><span class="fragment"></span>
+          <pre class="fragment"><code data-trim data-noescape>
+          var request = jQuery.ajax('/api/data/', function(res) { /*...*/ });
+
+          // Later
+
+          request.abort();
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Creating Observables</h2>
+          <pre class="stretch"><code data-trim data-noescape>
+            var Observable = Rx.Observable;
+
+            <span class="fragment">// Event streams of timed intervals
+            var source$ = Observable.interval(2000);</span>
+            <span class="fragment">// --tick--tick--tick--tick--tick--tick--></span>
+
+            <span class="fragment">// or
+
+            // Event stream of mouse clicks
+            var source$ = Observable.fromEvent(document, 'click');</span>
+            <span class="fragment">// --click--click------click------click-click--></span>
+
+            <span class="fragment">// or
+
+            // Event stream of an Ajax response
+            var source$ = Observable.ajax('/api/data');</span>
+            <span class="fragment">// -----jsonObject|</span>
+
+            <span class="fragment">// -----X</span>
+          </code></pre>
+
+        </section>
+
+
+        <section>
           <h2>The Observable interface</h2>
           <pre><code data-trim data-noescape>
-            // source$ is an Observable
-
             source$<span class="fragment">.subscribe(
               // next
               <span class="hl-2">function(item) { ... }</span>,
@@ -213,7 +332,7 @@
               
               // completed
               <span class="hl-4">function() { ... }</span>
-            )
+            );
             </span>
             </code></pre>
           <span class="fragment"></span>
@@ -231,49 +350,91 @@
               error: function(err) { ... },
 
               completed: function() { ... }
-            })
+            });
           </code></pre>
 
           <div class="fragment">
-            <p>ES2015 Method definition shorthand</p>
+            <p>ES2015 (ES6) Method definition shorthand</p>
             <pre data-trim="" data-noescape="" class="javascript hljs">source$.subscribe({
   <span class="hljs-function">next(<span class="hljs-params">item</span>) </span>{ ... },
 
   <span class="hljs-function">error(<span class="hljs-params">err</span>) </span>{ ... },
 
   <span class="hljs-function">completed(<span class="hljs-params"></span>) </span>{ ... }
-})</pre>
+});</pre>
           </div>
         </section>
 
-
         <section>
-          <h1>addListener vs subscribe</h1>
+          <h2>Stopping a stream</h2>
+          <pre><code data-trim data-noescape class="javascript">
+            var subscription = source$.subscribe(
+              // next
+              function(item) { ... },
+              
+              // error
+              function(err) { ... },
+              
+              // completed
+              function() { ... }
+            );
+
+            <span class="fragment" data-fragment-index=1>// Later</span>
+
+            <span class="fragment" data-fragment-index=1>subscription.unsubscribe();</span>
+          </code></pre>
+        </section>
+
+      </section>
+      <section>
+        <section>
+          <h1>Operators</h1>
+        </section>
+
+        <section data-background="img/all-operators.png">
+          <h1 class="fragment hljs" style="color: chartreuse;">Don't panic</h1>
         </section>
 
         <section>
-          <h1>They're the same</h1>
+          <h2>Treat Events like an Array</h2>
+          <pre><code data-trim data-noescape class="javascript">
+            [1, 6, 3, 3, 8, 2]
+              .filter(function(x) { return x % 2 === 0; })
+            // [6, 8, 2]
+              .map(function(x) { return x * 10; })
+            // [60, 80, 20]
+
+
+          </code></pre>
+
         </section>
 
-        <section>
-          <h1>Unitified interface</h1>
-          Ajax and mouse clicks Marble diagrams
-        </section>
+
 
         <section>
           <h1>Common ajax uses</h1>
+          <pre><code data-trim data-noescape class="javascript">
 
+
+
+          </code></pre>
         </section>
+
+
+
+
+        <!--
+        <section>
+          <h1 class="fragment">If they are the same...</h1>
+          <h1 class="fragment">why do we need Rx?</h1>
+          <h1 class="fragment">You goddamn Handsome fool.</h1>
+        </section>
+-->
+
 
         <section>
           <h1>Lazy</h1>
           Like Functions they need to be sub'd before anything happens
-        </section>
-
-        <section>
-          <h1>Cancellation</h1>
-
-
         </section>
       </section>
 
@@ -306,7 +467,6 @@
 
 
           <aside class="notes">
-
           </aside>
         </section>
       </section>
@@ -336,6 +496,13 @@
           </aside>
         </section>
       </section>
+
+      <section>
+        <h1>Gottchas</h1>
+        Multiple subscriptions Testing with Synchronous Observables
+      </section>
+
+      <!-- sineWave$.subscribe(updateBeard) -->
 
     </div>
   </div>

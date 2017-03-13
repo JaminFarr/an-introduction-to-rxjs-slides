@@ -10,10 +10,10 @@ function setupMouseControl(reveal) {
   window.addEventListener("mousedown", handleClick, false);
 
   function handleClick(e) {
-    if (e.ctrlKey) return;
+    if (e.ctrlKey || e.buttons === 1) return;
 
     e.preventDefault();
-    if (e.button === 0) reveal.next();
-    if (e.button === 2) reveal.prev();
+    if (e.buttons === 4) reveal.next();
+    if (e.buttons === 2) reveal.prev();
   }
 }

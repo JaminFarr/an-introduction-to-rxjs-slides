@@ -20,6 +20,10 @@ function setupHighlighter(reveal) {
         el.classList.remove("highlighted");
         el.classList.add("was-highlighted");
       });
+
+      update.slideEl.querySelectorAll(".fully-hidden").forEach(function(el) {
+        el.classList.remove("fully-hidden");
+      });
     })
     .filter(function(update) {
       return !isNaN(update.fragmentIndex);
@@ -31,6 +35,12 @@ function setupHighlighter(reveal) {
           .forEach(function(el, i) {
             el.classList.remove("was-highlighted");
             el.classList.add("highlighted");
+          });
+
+        update.slideEl
+          .querySelectorAll(".hd-" + update.fragmentIndex)
+          .forEach(function(el, i) {
+            el.classList.add("fully-hidden");
           });
       },
       function error(err) {

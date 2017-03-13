@@ -68,3 +68,7 @@
   width: 75%;
   float: left;
 }
+
+.fully-hidden {
+  display: none !important;
+}
