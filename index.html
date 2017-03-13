@@ -178,7 +178,7 @@
           <pre><code data-trim data-noescape>
               <span class="hl-3">document</span>.addEventListener(<span class="hl-4">'click'</span>, <span class="hl-5">function(e) {
                 console.log('clicked');
-              }</span>);  
+              }</span>);
           </code></pre>
 
           <img class="fragment hd-2 hd-3 hd-4 hd-5 hd-6 hd-7" src="img/clicked.gif" />
@@ -326,10 +326,10 @@
             source$<span class="fragment">.subscribe(
               // next
               <span class="hl-2">function(item) { ... }</span>,
-              
+
               // error
               <span class="hl-3">function(err) { ... }</span>,
-              
+
               // completed
               <span class="hl-4">function() { ... }</span>
             );
@@ -371,10 +371,10 @@
             var subscription = source$.subscribe(
               // next
               function(item) { ... },
-              
+
               // error
               function(err) { ... },
-              
+
               // completed
               function() { ... }
             );
@@ -396,6 +396,12 @@
         </section>
 
         <section>
+          RxJS is lodash for Observables
+          <pre><code data-trim data-noescape class="javascript">
+          </code></pre>
+        </section>
+
+        <section>
           <h2>Treat Events like an Array</h2>
           <pre><code data-trim data-noescape class="javascript">
             [1, 6, 3, 3, 8, 2]
@@ -403,33 +409,132 @@
             // [6, 8, 2]
               .map(function(x) { return x * 10; })
             // [60, 80, 20]
-
-
           </code></pre>
 
         </section>
 
+        <section>
+          take and skip
+        </section>
 
+
+
+        <section>
+          <h2>Combining Observables</h2>
+
+          <img src="img/modal.jpg" data-fragment-src='{
+            "0": "img/modal.jpg",
+            "1": "img/modal2.jpg",
+            "2": "img/modal3.jpg",
+            "3": "img/modal4.jpg"
+          }' />
+
+
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+        </section>
+
+        <section>
+          <pre><code data-trim="" data-noescape="" style="font-size: 200%; padding: 16px; overflow: visible;">
+            ---<span class="hl-1">a</span>-----<span class="hl-3">a</span>-----a----a--a-->
+            -------<span class="hl-2">b</span>----<span class="hl-4">b</span>-----b------->
+
+                ~~~ merge ~~~
+
+            ---<span class="hl-1">a</span>---<span class="hl-2">b</span>-<span class="hl-3">a</span>--<span class="hl-4">b</span>--a--b-a--a-->
+          </code></pre>
+
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+          <span class="fragment"></span>
+        </section>
+
+        <section>
+          <pre class="stretch"><code data-trim="" data-noescape="">
+            var close$ = Rx.Observable.merge(
+              Rx.Observable.fromEvent(closeBtn, 'click'),
+              Rx.Observable.fromEvent(xBtn, 'click'),
+              Rx.Observable.fromEvent(background, 'click')
+            );
+
+
+            <span class="fragment">var esc$ = Rx.Observable.fromEvent(document, 'keyup')
+                .filter(function(e) { return e.key === 'Escape'; });</span>
+
+
+            <span class="fragment">var closeWithEsc$ = close$.merge(esc$);</span>
+
+
+            <span class="fragment">var sub = closeWithEsc$
+              <span class="fragment">.take(1)</span>
+              .subscribe(function(){ /*close pop-up*/ });</span>
+
+          </code></pre>
+        </section>
+
+        <section>
+          <p>merge with completes</p>
+          <pre><code data-trim="" data-noescape="" style="font-size: 200%; padding: 16px; overflow: visible;">
+            ---a-----a---|
+            -------b----b-----b-----|
+
+                ~~~ merge ~~~
+
+            ---a---b-a--b-----b-----|
+          </code></pre>
+
+          <p>merge with errors</p>
+          <pre><code data-trim="" data-noescape="" style="font-size: 200%; padding: 16px; overflow: visible;">
+            ---a-----a-----a----a--a-->
+            -------b---X
+
+                ~~~ merge ~~~
+
+            ---a---b-a-X
+          </code></pre>
+        </section>
 
         <section>
           <h1>Common ajax uses</h1>
           <pre><code data-trim data-noescape class="javascript">
+            var getUpdates$ = Rx.Obserable.ajax('api/updates');
 
-
+            getUpdates$
+              .subscribe(
+                function(data) {  },
+                function(err) {  }
+              );
 
           </code></pre>
         </section>
 
-
-
-
-        <!--
         <section>
-          <h1 class="fragment">If they are the same...</h1>
-          <h1 class="fragment">why do we need Rx?</h1>
-          <h1 class="fragment">You goddamn Handsome fool.</h1>
+          <h2>Working with Node.js</h2>
+          <pre class="stretch"><code data-trim data-noescape class="javascript">
+            // Rx.Observable.bindCallback     fn(..., callback(data))
+            // Rx.Observable.bindNodeCallback fn(..., callback(err, data))
+
+            <span class="fragment">var fs = require('fs');
+            var Rx = require('rxjs');
+
+            var rxReadFile = Rx.Observable.bindNodeCallback(fs.readFile);</span>
+
+            <span class="fragment">var files = ['file1.txt', 'file2.txt', 'file3.txt'];
+
+            Rx.Observable.from(files)
+              .mergeMap(function(file) {
+                return rxReadFile(file)
+                  <span class="fragment">.catch(function() { return Rx.Observable.empty(); })</span>;
+              })
+              .subscribe(function(fileContents) {
+                // work with file data
+              });</span>
+
+          </code></pre>
         </section>
--->
+
 
 
         <section>
@@ -438,14 +543,6 @@
         </section>
       </section>
 
-      <section>
-        <section>
-          <h1>Modal Merging</h1>
-          <aside class="notes">
-
-          </aside>
-        </section>
-      </section>
 
 
       <section>
@@ -462,12 +559,46 @@
 
       <section>
         <section>
-          <h1>Realtime data collector</h1>
+          <h2>Data collector</h2>
 
+          <pre class="stretch"><code data-trim data-noescape class="javascript">
 
+            deviceStats$
+            // {id: 434, upRate: 345, downRate: 643, online: true}
+            // {id: 378, upRate: 345, downRate: 643, online: true}
+            // {id: 78, upRate: 0, downRate: 0, online: false} ...
+
+              <span class="fragment" data-fragment-index="1">.bufferTime(100)
+              .filter(function(buffer) { return buffer.length > 0; })</span>
+
+              .subscribe(writeToDatabase<span class="fragment" data-fragment-index="1">Batch</span>);
+
+              <span class="fragment">/*
+              ----a-a-a-a-a-aa-a-a-a-a-a-a-a-a-a-a-a-a-a-a-a-a-a-a->
+                ~~~ bufferTime ~~~
+              --------[a,a,a]--[a,a,a...]--[a,a,a...]--[a,a,a...]->
+              */</span>
+          </code></pre>
 
           <aside class="notes">
           </aside>
+        </section>
+
+        <section>
+          <pre><code data-trim data-noescape class="javascript">
+          var urls$ = deviceUrlsFromDb(dbConfig);
+          // https://device1, https://device2, https://device3
+
+          var deviceStats$ = timer$
+            .mergeMapTo(urls$) <span class="fragment">// .combineLatest(urls$)</span>
+            .mergeMap(
+              function(url) { return rxRequest(url); /* catch */ }<span class="fragment">,
+              function(url, content) {
+                return { url: url, content: content };
+              }</span>
+            )
+            .map(extractThroughData);
+          </code></pre>
         </section>
       </section>
 
